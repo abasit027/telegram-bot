@@ -117,15 +117,11 @@ const sub = bot => {
 	bot.action('rcreatenew', ctx => {
 		let message = ctx.update.callback_query.message;
 
-		let keyboard = Markup.inlineKeyboard([
-			button.callback('Enter Name', 'rentername'),
-			button.callback('Back', 'resultformat'),
-		]);
-		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
+		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Enter Your Name');
 	});
 
-	bot.action('rentername', ctx => {
-		let message = ctx.update.callback_query.message;
+	bot.on('message', ctx => {
+		message = ctx.update.message;
 
 		process.env.BACK_KEY = 'rentername';
 
@@ -134,7 +130,8 @@ const sub = bot => {
 			button.callback('Future', 'end'),
 			button.callback('Back', 'rcreatenew'),
 		]);
-		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
+
+		return ctx.reply('Select :', keyboard);
 	});
 
 	bot.action('rmanageformat', ctx => {
