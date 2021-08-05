@@ -1,7 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const signal = require('./sections/sginal/sginal.js');
-const strategy = require('./sections/admin_strategy/strategy.js');
+const { signal, strategy } = require('./sections/sections.js');
 
 const button = Markup.button;
 
@@ -57,12 +56,13 @@ bot.action('rfl', ctx => {
 
 bot.action('chnl', ctx => {
 	let message = ctx.update.callback_query.message;
+
 	process.env.BACK_KEY = 'chnl';
 
 	let keyboard = Markup.inlineKeyboard([
 		button.callback('Publish Channel Info', 'end'),
 		button.callback('Signal', 'signal'),
-		button.callback('Channel Managment', 'end'),
+		button.callback('Channel Managment', 'chnlMng'),
 		button.callback('Admin Strategy', 'strtg'),
 		button.callback('Back', 'menu'),
 	]);
