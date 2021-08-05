@@ -1,6 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 
 const { signal } = require('./sections/sginal/sginal.js');
+const strategy = require('./sections/admin_strategy/strategy.js');
 
 const button = Markup.button;
 
@@ -62,13 +63,14 @@ bot.action('chnl', ctx => {
 		button.callback('Publish Channel Info', 'end'),
 		button.callback('Signal', 'signal'),
 		button.callback('Channel Managment', 'end'),
-		button.callback('Admin Strategy', 'end'),
+		button.callback('Admin Strategy', 'strtg'),
 		button.callback('Back', 'menu'),
 	]);
 	return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 });
 
 signal(bot);
+strategy(bot);
 
 bot.action('end', ctx => {
 	let message = ctx.update.callback_query.message;
