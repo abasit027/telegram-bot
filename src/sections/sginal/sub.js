@@ -123,6 +123,8 @@ const sub = bot => {
 	bot.on('message', ctx => {
 		message = ctx.update.message;
 
+		const fullName = message.text;
+
 		process.env.BACK_KEY = 'rentername';
 
 		let keyboard = Markup.inlineKeyboard([
