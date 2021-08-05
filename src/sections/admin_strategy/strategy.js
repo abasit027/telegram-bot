@@ -26,17 +26,23 @@ const strategy = bot => {
 
 		process.env.BACK_KEY = 'strCrt';
 
-		let keyboard = Markup.inlineKeyboard([
-			button.callback('Import', 'end'),
-			button.callback('General', 'stGnrl'),
-			button.callback('Buy Strategy', 'strBS'),
-			button.callback('Sell Strategy', 'strBS'),
-			button.callback('Stop Strategy', 'strStp'),
-			button.callback('Trailing Strategy', 'strTr'),
-			button.callback('Leverage', 'strLv'),
-			button.callback('Save', 'end'),
-			button.callback('Back', 'strtg'),
-		]);
+		let keyboard = Markup.inlineKeyboard(
+			[
+				button.callback('Import', 'end'),
+				button.callback('General', 'stGnrl'),
+				button.callback('Buy Strategy', 'strBS'),
+				button.callback('Sell Strategy', 'strBS'),
+				button.callback('Stop Strategy', 'strStp'),
+				button.callback('Trailing Strategy', 'strTr'),
+				button.callback('Leverage', 'strLv'),
+				button.callback('Save', 'end'),
+				button.callback('Back', 'strtg'),
+			],
+			{
+				columns: 2,
+			},
+		);
+
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 	});
 

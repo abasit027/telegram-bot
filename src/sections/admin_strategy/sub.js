@@ -77,31 +77,48 @@ const sub = bot => {
 
 		process.env.BACK_KEY = 'strBS';
 
-		let keyboard = Markup.inlineKeyboard([
-			button.callback('Single buy/sell zone', 'end'),
-			button.callback('Multiple buy/sell zone', 'end'),
-			button.callback('Equal split', 'end'),
-			button.callback('Skip First', 'end'),
-			button.callback('Increase by 2', 'end'),
-			button.callback('Decrease by 2', 'end'),
-			button.callback('Sell by percentage', 'end'),
-			button.callback('Add custom strategyLeverage', 'strBSAd'),
-			button.callback('Remove custom strategy', 'end'),
-			button.callback('Back', 'strCrt'),
-		]);
+		let keyboard = Markup.inlineKeyboard(
+			[
+				button.callback('Single buy/sell zone', 'end'),
+				button.callback('Multiple buy/sell zone', 'end'),
+				button.callback('Equal split', 'end'),
+				button.callback('Skip First', 'end'),
+				button.callback('Increase by 2', 'end'),
+				button.callback('Decrease by 2', 'end'),
+				button.callback('Sell by percentage', 'end'),
+				button.callback('Add custom strategyLeverage', 'strBSAd'),
+				button.callback('Remove custom strategy', 'end'),
+				button.callback('Back', 'strCrt'),
+			],
+			{
+				columns: 2,
+			},
+		);
+
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 	});
 
 	bot.action('strBSAd', ctx => {
 		let message = ctx.update.callback_query.message;
 
-		let keyboard = Markup.inlineKeyboard([
-			button.callback('1', 'strBSAd2'),
-			button.callback('2', 'strBSAd2'),
-			button.callback('3', 'strBSAd2'),
-			button.callback('Upto 10', 'strBSAd2'),
-			button.callback('Back', 'strBS'),
-		]);
+		let keyboard = Markup.inlineKeyboard(
+			[
+				button.callback('1', 'strBSAd2'),
+				button.callback('2', 'strBSAd2'),
+				button.callback('3', 'strBSAd2'),
+				button.callback('4', 'strBSAd2'),
+				button.callback('5', 'strBSAd2'),
+				button.callback('6', 'strBSAd2'),
+				button.callback('7', 'strBSAd2'),
+				button.callback('8', 'strBSAd2'),
+				button.callback('9', 'strBSAd2'),
+				button.callback('10', 'strBSAd2'),
+				button.callback('Back', 'strBS'),
+			],
+			{
+				columns: 2,
+			},
+		);
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 	});
 
