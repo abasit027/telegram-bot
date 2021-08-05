@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const { signal, strategy, channel } = require('./sections/sections.js');
+const { signal, strategy, channel, channel_mng } = require('./sections/sections.js');
 
 const button = Markup.button;
 
@@ -72,6 +72,7 @@ bot.action('chnl', ctx => {
 signal(bot);
 strategy(bot);
 channel(bot);
+channel_mng(bot);
 
 bot.action('end', ctx => {
 	let message = ctx.update.callback_query.message;
