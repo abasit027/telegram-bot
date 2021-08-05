@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const { sub } = require('./sub.js');
+const sub = require('./sub.js');
 
 const button = Markup.button;
 
@@ -15,7 +15,7 @@ const strategy = bot => {
 
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Import', 'end'),
-			button.callback('General', 'gnrl'),
+			button.callback('General', 'stGnrl'),
 			button.callback('Buy Strategy', 'end'),
 			button.callback('Sell Strategy', 'end'),
 			button.callback('Stop Strategy', 'end'),
@@ -27,7 +27,7 @@ const strategy = bot => {
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 	});
 
-	// sub(bot);
+	sub(bot);
 };
 
 module.exports = strategy;
