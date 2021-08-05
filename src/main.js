@@ -1,15 +1,17 @@
 const { Telegraf, Markup } = require('telegraf');
 
+const { signal } = require('./sections/sginal/sginal.js');
+
 const button = Markup.button;
 
-const bot = new Telegraf('1943511815:AAFegkUd01zVBIU4HlHmNyWoRF-qOA-4xWo');
+require('dotenv').config();
+
+const bot = new Telegraf(process.env.TOKEN);
 
 bot.start(ctx => {
 	let keyboard = Markup.inlineKeyboard([button.callback('Main Menu', 'menu')]);
 	return ctx.reply('Click for Main Menu', keyboard);
 });
-
-let backKey = '';
 
 bot.action('menu', ctx => {
 	let message = ctx.update.callback_query.message;
@@ -32,7 +34,7 @@ bot.action('prf', ctx => {
 bot.action('wlt', ctx => {
 	let message = ctx.update.callback_query.message;
 
-	backKey = 'wlt';
+	process.env.BACK_KEY = 'wlt';
 
 	let keyboard = Markup.inlineKeyboard([
 		button.callback('Withdraw', 'end'),
@@ -46,7 +48,7 @@ bot.action('wlt', ctx => {
 bot.action('rfl', ctx => {
 	let message = ctx.update.callback_query.message;
 
-	backKey = 'rfl';
+	process.env.BACK_KEY = 'rfl';
 
 	let keyboard = Markup.inlineKeyboard([button.callback('Refferal History', 'end'), button.callback('Back', 'prf')]);
 	return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
@@ -54,8 +56,7 @@ bot.action('rfl', ctx => {
 
 bot.action('chnl', ctx => {
 	let message = ctx.update.callback_query.message;
-
-	backKey = 'chnl';
+	process.env.BACK_KEY = 'chnl';
 
 	let keyboard = Markup.inlineKeyboard([
 		button.callback('Publish Channel Info', 'end'),
@@ -67,10 +68,12 @@ bot.action('chnl', ctx => {
 	return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
 });
 
+signal(bot);
+
 bot.action('end', ctx => {
 	let message = ctx.update.callback_query.message;
 
-	let keyboard = Markup.inlineKeyboard([button.callback('End', 'End'), button.callback('Back', backKey)]);
+	let keyboard = Markup.inlineKeyboard([button.callback('End', 'End'), button.callback('Back', process.env.BACK_KEY)]);
 	return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'This is end', keyboard);
 });
 
