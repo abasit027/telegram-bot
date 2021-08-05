@@ -60,7 +60,7 @@ bot.action('chnl', ctx => {
 
 	let keyboard = Markup.inlineKeyboard([
 		button.callback('Publish Channel Info', 'end'),
-		button.callback('Signal', 'end'),
+		button.callback('Signal', 'signal'),
 		button.callback('Channel Managment', 'end'),
 		button.callback('Admin Strategy', 'end'),
 		button.callback('Back', 'menu'),
