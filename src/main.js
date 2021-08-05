@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const { signal, strategy } = require('./sections/sections.js');
+const { signal, strategy, channel } = require('./sections/sections.js');
 
 const button = Markup.button;
 
@@ -60,7 +60,7 @@ bot.action('chnl', ctx => {
 	process.env.BACK_KEY = 'chnl';
 
 	let keyboard = Markup.inlineKeyboard([
-		button.callback('Publish Channel Info', 'end'),
+		button.callback('Publish Channel Info', 'publishinfochannel'),
 		button.callback('Signal', 'signal'),
 		button.callback('Channel Managment', 'chnlMng'),
 		button.callback('Admin Strategy', 'strtg'),
@@ -71,6 +71,7 @@ bot.action('chnl', ctx => {
 
 signal(bot);
 strategy(bot);
+channel(bot);
 
 bot.action('end', ctx => {
 	let message = ctx.update.callback_query.message;
