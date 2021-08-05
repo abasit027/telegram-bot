@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const { signal } = require('./sections/sginal/sginal.js');
+const signal = require('./sections/sginal/sginal.js');
 const strategy = require('./sections/admin_strategy/strategy.js');
 
 const button = Markup.button;

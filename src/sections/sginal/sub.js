@@ -11,8 +11,6 @@ const sub = bot => {
 	bot.action('signalformat', ctx => {
 		let message = ctx.update.callback_query.message;
 
-		process.env.BACK_KEY = 'signalformat';
-
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Create New', 'screatenew'),
 			button.callback('Manage Format', 'smanageformat'),
@@ -23,8 +21,6 @@ const sub = bot => {
 
 	bot.action('screatenew', ctx => {
 		let message = ctx.update.callback_query.message;
-
-		process.env.BACK_KEY = 'screatenew';
 
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Enter Name', 'sentername'),
@@ -48,8 +44,6 @@ const sub = bot => {
 
 	bot.action('smanageformat', ctx => {
 		let message = ctx.update.callback_query.message;
-
-		process.env.BACK_KEY = 'smanageformat';
 
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Format 1', 'ssignalmanageformat'),
@@ -75,8 +69,6 @@ const sub = bot => {
 
 	bot.action('opensignal', ctx => {
 		let message = ctx.update.callback_query.message;
-
-		process.env.BACK_KEY = 'opensignal';
 
 		let keyboard = Markup.inlineKeyboard([button.callback('Filter', 'openfilter'), button.callback('Back', 'signal')]);
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
@@ -114,8 +106,6 @@ const sub = bot => {
 	bot.action('resultformat', ctx => {
 		let message = ctx.update.callback_query.message;
 
-		process.env.BACK_KEY = 'resultformat';
-
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Create New', 'rcreatenew'),
 			button.callback('Manage Format', 'rmanageformat'),
@@ -126,8 +116,6 @@ const sub = bot => {
 
 	bot.action('rcreatenew', ctx => {
 		let message = ctx.update.callback_query.message;
-
-		process.env.BACK_KEY = 'rcreatenew';
 
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Enter Name', 'rentername'),
@@ -152,8 +140,6 @@ const sub = bot => {
 	bot.action('rmanageformat', ctx => {
 		let message = ctx.update.callback_query.message;
 
-		process.env.BACK_KEY = 'rmanageformat';
-
 		let keyboard = Markup.inlineKeyboard([
 			button.callback('Format 1', 'rsignalmanageformat'),
 			button.callback('Format 2', 'rsignalmanageformat'),
@@ -177,6 +163,4 @@ const sub = bot => {
 	});
 };
 
-module.exports = {
-	sub,
-};
+module.exports = sub;

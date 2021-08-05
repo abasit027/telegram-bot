@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 
-const { sub } = require('./sub.js');
+const sub = require('./sub.js');
 
 const button = Markup.button;
 
@@ -81,6 +81,4 @@ const signal = bot => {
 	sub(bot);
 };
 
-module.exports = {
-	signal,
-};
+module.exports = signal;
