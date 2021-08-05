@@ -1,4 +1,5 @@
 const { Telegraf, Markup } = require('telegraf');
+const Calendar = require('telegraf-calendar-telegram');
 
 const sub = require('./sub.js');
 
@@ -58,11 +59,14 @@ const signal = bot => {
 		process.env.BACK_KEY = 'historydate';
 
 		let keyboard = Markup.inlineKeyboard([
-			button.callback('Start Date', 'end'),
-			button.callback('End Date', 'end'),
+			button.callback('Set Dates', 'setD'),
 			button.callback('Back', 'historyfilter'),
 		]);
 		return ctx.telegram.editMessageText(message.chat.id, message.message_id, null, 'Select :', keyboard);
+	});
+
+	bot.action('setD', ctx => {
+		return ctx.reply('Send /calendar to choose start date, Do it twice first for starting date then for ending date');
 	});
 
 	bot.action('historysignaltype', ctx => {

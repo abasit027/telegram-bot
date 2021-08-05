@@ -1,4 +1,5 @@
 const { Telegraf, Markup } = require('telegraf');
+const Calendar = require('telegraf-calendar-telegram');
 
 const { signal, strategy, channel, channel_mng } = require('./sections/sections.js');
 
@@ -7,6 +8,40 @@ const button = Markup.button;
 require('dotenv').config();
 try {
 	const bot = new Telegraf(process.env.TOKEN);
+
+	const calendar = new Calendar(bot);
+
+	const today = new Date();
+	const minDate = new Date();
+
+	let c = 1;
+
+	let startDate = new Date();
+	let endDate = new Date();
+
+	minDate.setFullYear(today.getFullYear() - 40);
+
+	calendar.setMinDate(minDate);
+
+	calendar.setMaxDate(today);
+
+	calendar.setDateListener((ctx, date) => {
+		if (c == 1) {
+			startDate = date;
+			c = 2;
+		} else {
+			endDate = date;
+			if (endDate > startDate) {
+				c = 1;
+			} else {
+				ctx.reply('Ending date can not be greater than starting date, Choose again');
+			}
+		}
+	});
+
+	bot.command('calendar', ctx => {
+		ctx.reply('Calendar', calendar.getCalendar());
+	});
 
 	bot.start(ctx => {
 		let keyboard = Markup.inlineKeyboard([button.callback('Main Menu', 'menu')]);
